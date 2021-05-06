@@ -24,7 +24,8 @@ class Node:
     def add_child(self, node):
         if node not in self._children:
             self._children.append(node) # might need node.value
-            node.parent = self
+            if node.parent != self:
+                node.parent = self
         else:
             print('Node already exists in list.')
 
@@ -43,9 +44,31 @@ class Node:
     def remove_child(self, node):
         if node in self._children:
             self._children.remove(node)
-            node._parent
+            node.parent = None
         else:
             print("Node doesn't exist in list.")
+    
+    def depth_search(self, value):
+        if self._value == value:
+            return self
+        for node in self._children:
+            node_were_looking_for = node.depth_search(value)
+            if node_were_looking_for:
+                return node_were_looking_for
+        return None
+    
+    def breadth_search(self, value):
+        res = None
+        que = [self]
+        while que:
+            if que[0].value == value:
+                res = que[0]
+            for node in que[0].children:
+                que.append(node)
+            que.pop(0)
+        return res
+
+        
 
 
 # node1 = Node("root1")
