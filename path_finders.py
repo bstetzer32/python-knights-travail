@@ -45,6 +45,19 @@ class KnightPathFinder:
         self._considered_positions.update(filtered)
         return filtered
 
+    def build_move_tree(self):
+        queue = [self._root]
+        while queue:
+            children = self.new_move_positions(queue[0].value)
+            for child in children:
+                node_child = Node(child)
+                queue.append(node_child)
+                queue[0].add_child(node_child)
+            queue.pop(0)
 
-finder = KnightPathFinder((0, 0))
-print(finder.new_move_positions((1, 2)))   # Expected outcome: {(1, 2), (2, 1)}
+# finder = KnightPathFinder((0, 0))
+# print(finder.new_move_positions((1, 2)))   # Expected outcome: {(1, 2), (2, 1)}
+
+finder = KnightPathFinder((4, 4))
+finder.build_move_tree()
+print(finder._root.children)

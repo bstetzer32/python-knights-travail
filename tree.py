@@ -26,8 +26,8 @@ class Node:
             self._children.append(node) # might need node.value
             if node.parent != self:
                 node.parent = self
-        else:
-            print('Node already exists in list.')
+        # else:
+        #     print('Node already exists in list.')
 
     @parent.setter
     def parent(self, node):
@@ -47,7 +47,7 @@ class Node:
             node.parent = None
         else:
             print("Node doesn't exist in list.")
-    
+
     def depth_search(self, value):
         if self._value == value:
             return self
@@ -56,7 +56,7 @@ class Node:
             if node_were_looking_for:
                 return node_were_looking_for
         return None
-    
+
     def breadth_search(self, value):
         res = None
         que = [self]
@@ -68,7 +68,9 @@ class Node:
             que.pop(0)
         return res
 
-        
+    def __repr__(self):
+        return f'{self._value}'
+
 
 
 # node1 = Node("root1")
