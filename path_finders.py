@@ -5,18 +5,18 @@ class KnightPathFinder:
         self._x = value[0]
         self._y = value[1]
         self._root = Node((value[0], value[1]))
-        self._considered_positions = set(self._root)
+        self._considered_positions = {value}
 
     def get_valid_moves(self, pos):
-        valid_moves = {}
-        right1 = pos(0) + 1
-        right2 = pos(0) + 2
-        left1 = pos(0) - 1
-        left2 = pos(0) - 2
-        up1 = pos(1) + 1
-        up2 = pos(1) + 2
-        down1 = pos(1) - 1
-        down2 = pos(1) - 2
+        valid_moves = set()
+        right1 = pos[0] + 1
+        right2 = pos[0] + 2
+        left1 = pos[0] - 1
+        left2 = pos[0] - 2
+        up1 = pos[1] + 1
+        up2 = pos[1] + 2
+        down1 = pos[1] - 1
+        down2 = pos[1] - 2
         if(right1 >= 0 and right1 <= 7):
             if(up2 >= 0 and up2 <= 7):
                 valid_moves.add((right1, up2))
@@ -42,9 +42,9 @@ class KnightPathFinder:
     def new_move_positions(self, pos):
         valid = self.get_valid_moves(pos)
         filtered = (valid - self._considered_positions)
-        self._cosidered_positions.update(filtered)
+        self._considered_positions.update(filtered)
         return filtered
 
 
 finder = KnightPathFinder((0, 0))
-print(finder.new_move_positions((0, 0)))   # Expected outcome: {(1, 2), (2, 1)}
+print(finder.new_move_positions((1, 2)))   # Expected outcome: {(1, 2), (2, 1)}

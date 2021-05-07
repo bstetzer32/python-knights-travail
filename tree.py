@@ -1,5 +1,5 @@
 class Node:
-    # __slots__ = ['_value', '_parent', '_children']
+    __slots__ = ['_value', '_parent', '_children']
     def __init__(self, value):
         """
         Construct a new node with value, parent node, and child nodes.
